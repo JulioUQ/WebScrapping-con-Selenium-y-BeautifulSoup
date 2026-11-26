@@ -1,11 +1,23 @@
-# Tipología y ciclo de vida de los datos: 
-# PR1: ¿Cómo podemos capturar los datos de la web?
+# Proyecto · Extracción de registros públicos de la flota pesquera
 
-## Descripción 
+Práctica de extracción de datos que recopila registros de buques españoles y europeos y genera archivos CSV para su análisis.
+
+## Tecnologías
+
+Python, Selenium y Beautiful Soup
+
+## Explorar el repositorio
+
+- [`1. Scripts`](./1.%20Scripts)
+- [`4. Solucion/data`](./4.%20Solucion/data)
+
+## Documentación
+
+#### Descripción 
 
 Este proyecto utiliza Selenium, Requests y BeautifulSoup para automatizar la extracción de datos desde el sitio web de Fleet Europa de la Unión Europea y el registro nacional de la flota pesquera española. El script automatiza la búsqueda de todos los barcos registrados, navega a través de las páginas de resultados y guarda los datos en un archivo CSV.
 
-## Estructura del Proyecto
+#### Estructura del Proyecto
 
 WEB SCRAPPING CFRs EU/  
 │  
@@ -42,11 +54,11 @@ WEB SCRAPPING CFRs EU/
 |── requirements.txt                                      
   
 
-## Uso
+#### Uso
 
 Para capturar los datos desde la web de [Fleet Europa de la Unión Europea]("https://webgate.ec.europa.eu/fleet-europa/search_en") sigue estos pasos:
 
-### 1.  Abre la terminal en VSCode:
+##### 1.  Abre la terminal en VSCode:
 
 Haz clic en el menú "Terminal" y selecciona "Nueva terminal".
 
@@ -56,16 +68,16 @@ Puedes ejecutar:
 ```bash
 cd ../WebScrapping con Selenium y BeautifulSoup - Registro General de la Flota Pesquera
 ```
-### 2. Instala las dependencias:
+##### 2. Instala las dependencias:
 
 Asegúrate de haber instalado las dependencias listadas en `requirements.txt` antes de ejecutar el archivo principal:
 
 ```bash
 pip install -r requirements.txt
 ```
-### 3. Ejecuta el archivo principal:
+##### 3. Ejecuta el archivo principal:
 
-#### 3.1. Ejecuta el script de la siguiente manera:
+###### 3.1. Ejecuta el script de la siguiente manera:
 
 - Si lo ejecutas desde Windows simplemente ejecuta el siguiente comando en la terminal: 
 
@@ -79,7 +91,7 @@ python main.py
 QT_LOGGING_RULES="*.debug=false" main.py
 ```
 
-#### 3.2. El script realizará lo siguiente:
+###### 3.2. El script realizará lo siguiente:
 
 - Accederá a la página de Fleet Europa.
 - Seleccionará la opción "EU" y "All Vessels".
@@ -92,7 +104,7 @@ QT_LOGGING_RULES="*.debug=false" main.py
 - Por cada CFR de la lista realiza una petición a la web y almacena los datos en un DataFrame.
 - Guarda el DataFrame generado en ./4. Solucion/data/datos_buques_ESP.csv
 
-#### 3.3. Scrapping solo de buques españoles
+###### 3.3. Scrapping solo de buques españoles
 
 - Si deseas scrapear datos técnicos de buques españoles únicamente, se puede utilizar el fichero 
 
@@ -101,7 +113,7 @@ python main.py
 ```
 
 
-## Licencia
+#### Licencia
 
 Este proyecto está bajo la Licencia ‘Creative Commons Attribution 4.0 International’. Esta licencia permite que el dataset sea usado, compartido, adaptado y redistribuido, siempre que se cumplan tres condiciones fundamentales:
 - Atribución (BY): Se debe reconocer adecuadamente la autoría del trabajo, mencionando tanto al autor del scraping como a las fuentes oficiales (Ministerio de Agricultura, Pesca y Alimentación de España y la Comisión Europea).
@@ -109,4 +121,3 @@ Este proyecto está bajo la Licencia ‘Creative Commons Attribution 4.0 Interna
 - Compartir Igual (SA): Si se generan obras derivadas o se modifica el dataset, estas deben compartirse bajo la misma licencia, garantizando que el conocimiento permanezca abierto y libre para futuras reutilizaciones.
  
 Consulta el archivo [`LICENSE`](./LICENSE.txt) o [CC-BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) para más detalles.
-
