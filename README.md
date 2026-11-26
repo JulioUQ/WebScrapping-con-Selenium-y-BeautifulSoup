@@ -1,112 +1,77 @@
-# Tipología y ciclo de vida de los datos: 
-# PR1: ¿Cómo podemos capturar los datos de la web?
+<div align="center">
 
-## Descripción 
+![Ingeniería De Datos](https://img.shields.io/badge/INGENIER%C3%8DA_DE_DATOS-EF6C00?style=for-the-badge)
 
-Este proyecto utiliza Selenium, Requests y BeautifulSoup para automatizar la extracción de datos desde el sitio web de Fleet Europa de la Unión Europea y el registro nacional de la flota pesquera española. El script automatiza la búsqueda de todos los barcos registrados, navega a través de las páginas de resultados y guarda los datos en un archivo CSV.
+# Web scraping del registro de la flota pesquera
 
-## Estructura del Proyecto
+Extracción automatizada de los registros europeo y español de buques pesqueros con Selenium, Requests y BeautifulSoup, para construir un conjunto de datos de la flota española.
 
-WEB SCRAPPING CFRs EU/  
-│  
-|── 0. Teoria/                            
-│   ├── M2.851_GuiaAprendizaje_Bloque2.pdf  
-│   ├── Richard Lawson - Web Scraping with Python.pdf  
-│   └── WebScrapping.pdf  
-│  
-|── 1. Scripts  
-│   └── src/                                                   
-|        └── main.py                                           
-|   	└── scrapping_fleet_ESP.py               
-│        └──scrapping_fleet_EU.py                  
-│   └── notebook/                                          
-	└── scrapping_CFRs_EU-ESP.ipynb   
-│  
-|── 3. Enunciado PR 1/                                
-│   └── M2.851_20242_Practica1.pdf  
-│  
-|── 4. Solucion/                                             
-│   ├── data/                                                  
-│       └── resultados_fleet.csv  
-│   └── memoria/                                           
-│       └── PR1_Ubeda_Quesada_Julio-Zamora_Vera_Lucas.pdf  
-│  
-|── 5. Literatura/                                             
-│   └── Dialnet-ExpansionYModernizacionDeLaFlotaPesquera.pdf  
-│  
-|── 6. Figura y graficos/                                
-│   └── openart-image_IBbRrax9_174290720241...  
-│  
-|── LICENSE.txt                                            
-|── README.md                                          
-|── requirements.txt                                      
-  
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=flat-square&logo=selenium&logoColor=white) ![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-4B8BBE?style=flat-square) ![pandas](https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white)
 
-## Uso
+</div>
 
-Para capturar los datos desde la web de [Fleet Europa de la Unión Europea]("https://webgate.ec.europa.eu/fleet-europa/search_en") sigue estos pasos:
+---
 
-### 1.  Abre la terminal en VSCode:
+## Descripción general
 
-Haz clic en el menú "Terminal" y selecciona "Nueva terminal".
+Los datos técnicos de cada buque están repartidos entre el registro de la flota de la Unión Europea (Fleet Register) y el registro nacional español, y solo se pueden consultar página a página. Este proyecto automatiza la navegación por ambos sitios y reúne la información en un CSV.
 
-Asegúrate de que estás en el directorio del proyecto donde se encuentran los subdirectorios listados arriba.
+Es la primera fase de la serie sobre la flota pesquera, que continúa en [ml-flota-pesquera](https://github.com/JulioUQ/ml-flota-pesquera) y [app-dashboard-flota-pesquera](https://github.com/JulioUQ/app-dashboard-flota-pesquera).
 
-Puedes ejecutar: 
-```bash
-cd ../WebScrapping con Selenium y BeautifulSoup - Registro General de la Flota Pesquera
+## Funcionalidades
+
+- Navegación automática por el buscador europeo: selección de país y tipo de buque, 100 resultados por página y recorrido de todas las páginas.
+- Extracción de la lista de identificadores CFR de los buques españoles.
+- Consulta de cada CFR en el registro español y construcción de un DataFrame con los datos técnicos.
+- Exportación a CSV del resultado.
+
+## Tecnologías y herramientas
+
+| Ámbito | Herramientas |
+| --- | --- |
+| Navegación | Selenium |
+| Peticiones y parseo | Requests, BeautifulSoup |
+| Datos | pandas |
+
+## Estructura del proyecto
+
+```text
+.
+├── 1. Scripts/
+│   ├── src/                # main.py, scrapping_fleet_EU.py, scrapping_fleet_ESP.py
+│   └── notebook/           # Versión en cuaderno del proceso
+├── 4. Solucion/
+│   ├── data/               # CSV resultantes
+│   └── memoria/            # Memoria del proyecto (PDF)
+├── 0. Teoria/  ·  5. Literatura/  ·  6. Figura y graficos/
+├── LICENSE.txt
+└── requirements.txt
 ```
-### 2. Instala las dependencias:
 
-Asegúrate de haber instalado las dependencias listadas en `requirements.txt` antes de ejecutar el archivo principal:
+## Instalación y uso
 
 ```bash
 pip install -r requirements.txt
-```
-### 3. Ejecuta el archivo principal:
-
-#### 3.1. Ejecuta el script de la siguiente manera:
-
-- Si lo ejecutas desde Windows simplemente ejecuta el siguiente comando en la terminal: 
-
-```bash
+cd "1. Scripts/src"
 python main.py
 ```
 
-- Si usas macos y quieres evitar mensajes de warnings ejecuta: 
+En macOS, para ocultar los avisos de Qt: `QT_LOGGING_RULES="*.debug=false" python main.py`.
 
-```bash
-QT_LOGGING_RULES="*.debug=false" main.py
-```
+## Resultados
 
-#### 3.2. El script realizará lo siguiente:
+- [Caso de estudio en el portfolio](https://juliouq.github.io/Portfolio-Web---JulioUQ/es/casos/web-scraping-flota/): proceso, decisiones y publicación del conjunto de datos.
 
-- Accederá a la página de Fleet Europa.
-- Seleccionará la opción "EU" y "All Vessels".
-- Iniciará la búsqueda de barcos registrados.
-- Ajustará el número de resultados por página a 100.
-- Recorrerá todas las páginas de resultados.
-- Extraerá los datos y los guardará en ./data/resultados_scrapping_fleet.csv.
-- Generará una lista con los CFRs de los buques españoles.
-- Accede a la página del registro español.
-- Por cada CFR de la lista realiza una petición a la web y almacena los datos en un DataFrame.
-- Guarda el DataFrame generado en ./4. Solucion/data/datos_buques_ESP.csv
+## Aspectos técnicos destacados
 
-#### 3.3. Scrapping solo de buques españoles
+- Combinación de Selenium (sitio dinámico) y Requests con BeautifulSoup (fichas estáticas), cada uno donde rinde mejor.
+- Paginación completa y escritura incremental de resultados.
+- Proyecto en equipo con Lucas Zamora Vera; la memoria documenta el proceso.
 
-- Si deseas scrapear datos técnicos de buques españoles únicamente, se puede utilizar el fichero 
+## Autor
 
-```bash
-python main.py
-```
+**Julio Úbeda Quesada** · Data Scientist
 
+[![Portfolio](https://img.shields.io/badge/Portfolio-0B2545?style=flat-square&logo=astro&logoColor=white)](https://juliouq.github.io/Portfolio-Web---JulioUQ/es/) [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square)](https://www.linkedin.com/in/juliouq/) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/JulioUQ)
 
-## Licencia
-
-Este proyecto está bajo la Licencia ‘Creative Commons Attribution 4.0 International’. Esta licencia permite que el dataset sea usado, compartido, adaptado y redistribuido, siempre que se cumplan tres condiciones fundamentales:
-- Atribución (BY): Se debe reconocer adecuadamente la autoría del trabajo, mencionando tanto al autor del scraping como a las fuentes oficiales (Ministerio de Agricultura, Pesca y Alimentación de España y la Comisión Europea).
-- No Comercial (NC): Restringe el uso del dataset a fines no comerciales, protegiendo así su uso en contextos educativos, investigativos o de divulgación sin que se explote con fines lucrativos.
-- Compartir Igual (SA): Si se generan obras derivadas o se modifica el dataset, estas deben compartirse bajo la misma licencia, garantizando que el conocimiento permanezca abierto y libre para futuras reutilizaciones.
- 
-Consulta el archivo [`LICENSE`](./LICENSE.txt) o [CC-BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) para más detalles.
-
+<sub>El conjunto de datos se distribuye con licencia Creative Commons Atribución-NoComercial 4.0 (ver LICENSE.txt). Proyecto realizado en el Máster Universitario en Ciencia de Datos.</sub>
